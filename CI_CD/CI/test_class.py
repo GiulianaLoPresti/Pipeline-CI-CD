@@ -1,3 +1,8 @@
+# doc test class è una modifica che facciamo dopo per lanciare il docker di Pipeline CI_CD
+"""
+doc test class
+
+"""
 # Scriviamo una classe semplice che mi permetta di effettuare dei test con i CI/CD
 
 class Testclass:
