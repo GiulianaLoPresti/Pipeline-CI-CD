@@ -37,6 +37,6 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       # Unica modifica che facciamo: aggiungiamo la working directory
-      working-directory: "Pipeline-CI-CD/CI/test_class.py"  # percorso in cui si trova il file pytest
+      working-directory: "Pipeline-CI-CD/CI"  # percorso in cui si trova il file test_class.py
       run: |    # si runnano i pytest che abbiamo impostato
         pytest
