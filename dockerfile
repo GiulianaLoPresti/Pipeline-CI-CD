@@ -5,7 +5,7 @@ FROM python:3.10-slim
 
 # Copiamo il contenuto della directory
 #./ inica la cartella dove si trova il docker file, poi specifichiamo meglio il percorso
-COPY ./workspaces/Pipeline-CI-CD/CD/app  
+COPY ./workspaces/Pipeline-CI-CD/CD/app /app
 
 # copiamo tutto quello che sta il CD nella cartella app del docker container
 
