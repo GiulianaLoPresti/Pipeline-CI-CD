@@ -1,0 +1,42 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+#Questo è un docker container vuoto basato su ubuntu e su cui utilizziamo Python 3.10
+
+name: continous integration
+
+on:   # l'azione verrà attivata sul puch e sul pull_requests, nel main
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read  #necessario per eseguirla
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest    # usiamo l'ultima versione di ubuntu
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+    - name: Install dependencies  # in automatico lo strumento ci permette di installare delle librerie/estensioni, ovvero pytest e flake8 (per il linting, indentazione del file). Possiamo scegliere qui cosa inserire in base a cosa ci serve
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Lint with flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Test with pytest
+      # Unica modifica che facciamo: aggiungiamo la working directory
+      working-directory: "Pipeline-CI-CD/CI/test_class.py"  # percorso in cui si trova il file pytest
+      run: |    # si runnano i pytest che abbiamo impostato
+        pytest
