@@ -15,4 +15,4 @@ WORKDIR /app
 RUN ls
 
 # Eseguiamo il file app.py
-CMD["python","app.py"]
+CMD ["python","app.py"]
