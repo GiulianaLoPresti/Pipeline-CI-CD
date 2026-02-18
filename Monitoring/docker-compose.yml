@@ -1,0 +1,26 @@
+# scrivo online: docker compose grafana e cerchiamo la sezione "Save your Grafana Data".
+# Dalla documentazione di grafana:
+
+
+services:
+  grafana:
+    image: grafana/grafana-enterprise
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    volumes:
+      - grafana-storage:/var/lib/grafana
+volumes:
+  grafana-storage: {}
+
+# restart: quando un'applicazione termina inaspettatamente, docker compose se ne accorge e potrebbe far partire un'altra
+# applicazione. Qua specifichiamo quando vogliamo che questo accada. unless-stopped indica che questo accade
+# a meno che non sia proprio io a fermare il container.
+
+# ports: ci connettiamo alla porta 3000 di docker e viene mandato alla porta 3000 di grafana
+
+# volumes: quello che sta in var/lib/grafana deve essere salvato in volumi esterni in modo che possa persistere al container.
+
+# Poi tast dx sopra docker-compose.yml a sx, e poi compose up: partirà il download di immagine e poi in basso a dx: apri nel browser
+# oppure al link su porte (nella porta corrispondente --> 3000): di apre Grafana
