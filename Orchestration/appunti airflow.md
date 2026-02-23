@@ -21,3 +21,14 @@ echo -e "AIRFLOW_UID=$(id -u)" > .env
 Inseriamo in logs il file .gitignore e gli scriviamo "*  !.gitignore" e salviamo
 
 Facciamo il commit e lo chiamiamo "airflow configurations"
+
+Dalla documentazione, inizializziamo i database
+#### Terminale
+docker compose up airflow-init
+Docker compose scarica le immagini, redis e postgres sono dei db 
+
+### Se non funziona, per eliminre quello che abbiamo fatto e ricominciare da capo
+Cleaning-up the environment
+
+### Se tutto funziona:
+docker compose up
