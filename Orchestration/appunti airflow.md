@@ -6,7 +6,8 @@ cd Orchestration
 
 ### Sez Fetching docker-compose.yaml
 #### Terminale
-Copia link curl ecc. nel terminale
+Copia link curl ecc. nel terminale:
+curl -LfO 'https://airflow.apache.org/docs/apache-airflow/3.1.7/docker-compose.yaml'
 Scarica il file docker-compose dentro la cartella Orchestration
 
 
@@ -24,6 +25,7 @@ Facciamo il commit e lo chiamiamo "airflow configurations"
 
 Dalla documentazione, inizializziamo i database
 #### Terminale
+--- docker compose up -d
 docker compose up airflow-init
 Docker compose scarica le immagini, redis e postgres sono dei db 
 
@@ -31,4 +33,17 @@ Docker compose scarica le immagini, redis e postgres sono dei db
 Cleaning-up the environment
 
 ### Se tutto funziona:
-docker compose up
+docker compose up -d
+
+Questo farà partire tutti i container:
+postgres → il database
+redis → broker Celery
+airflow-apiserver → UI web
+scheduler, worker, triggerer → esecuzione DAG
+
+docker compose ps
+Lo stato deve essere healthy su tutti i container principali (airflow-apiserver, postgres, redis, ecc.)
+La porta 8080 deve essere Public se vuoi accedere al web UI
+
+
+Se chiudo e riapro, la porta potrebbe diventare privata. Col tasto destro la rimetto in pubblica per riaprire Airflow
